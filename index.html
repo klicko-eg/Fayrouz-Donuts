@@ -151,6 +151,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            min-height: 200px;
         }
 
         .item-card {
@@ -382,7 +383,8 @@
     <div class="container">
         
         <div class="store-header">
-            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=200&q=80" alt="Fayrouz Donuts" class="store-avatar">
+            <!-- تم تغيير صورة اللوجو لصورة دوناتس أصلية -->
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=200" alt="Fayrouz Donuts" class="store-avatar">
             <h1 class="store-title">FAYROUZ DONUTS</h1>
             <p class="store-desc">دوناتس وكوكيز طازجة ولذيذة تُحضر يومياً بأجود المكونات 🍩✨</p>
             
@@ -423,7 +425,7 @@
             
             <div class="form-group">
                 <label>الاسم بالكامل:</label>
-                <input type="text" id="custName" class="form-input" placeholder="مثال: أحمد فكري">
+                <input type="text" id="custName" class="form-input" placeholder="مثال: أحمد">
             </div>
 
             <div class="form-group">
@@ -447,7 +449,7 @@
 
             <div class="form-group">
                 <label>ملاحظات خاصة للأوردر (اختياري):</label>
-                <textarea id="custNotes" class="form-textarea" rows="2" placeholder="مثال: كتابة إهداء على العلبة، عدم وضع صوص زيارة..."></textarea>
+                <textarea id="custNotes" class="form-textarea" rows="2" placeholder="مثال: كتابة إهداء على العلبة..."></textarea>
             </div>
 
             <button class="send-order-btn" onclick="sendOrderWhatsApp()">
@@ -458,52 +460,55 @@
     </div>
 
     <script>
-        // الأصناف التجريبية المجهزة
         const products = [
-            { id: 1, cat: 'donuts', name: "دوناتس نوتيلا فادج", desc: "محشوة شيكولاتة نوتيلا أصلية مع مكسرات بندق", price: 45, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=300&q=80" },
-            { id: 2, cat: 'donuts', name: "دوناتس لوتس كرانشي", desc: "مغطاة بزبدة اللوتس وبسكويت كرانشي محمص", price: 50, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80" },
-            { id: 3, cat: 'donuts', name: "دوناتس بينك جلايزد", desc: "دوناتس خفيفة بطعم الفراولة والسكر الوردي", price: 35, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80" },
-            { id: 4, cat: 'cookies', name: "كوكيز تشوكليت شيبس", desc: "كوكيز أمريكي دافئ بحبيبات الشيكولاتة الداكنة", price: 30, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=300&q=80" },
-            { id: 5, cat: 'cookies', name: "كوكيز ريد فيلفيت", desc: "طري بقطع الشيكولاتة البيضاء والجبن الكريمي", price: 40, img: "https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?auto=format&fit=crop&w=300&q=80" },
-            { id: 6, cat: 'cinnamon', name: "سينامون رول أوريجينال", desc: "لفائف القرفة الطازجة بجليد السكر والكريمي", price: 55, img: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=300&q=80" },
-            { id: 7, cat: 'donuts', name: "دوناتس بستاشيو فستق", desc: "مغطاة بزبدة الفستق الطبيعية وقطع الفستق", price: 60, img: "https://images.unsplash.com/photo-1626094309830-abbb0c99da4a?auto=format&fit=crop&w=300&q=80" },
-            { id: 8, cat: 'donuts', name: "دوناتس كراميل مملح", desc: "مزيج السولتد كراميل الرائع مع الفول السوداني", price: 40, img: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=300&q=80" },
-            { id: 9, cat: 'cookies', name: "كوكيز ثلاثي الشيكولاتة", desc: "مزيج غني من الشيكولاتة البيضاء والدارك والحليب", price: 45, img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=300&q=80" },
-            { id: 10, cat: 'donuts', name: "ميني دوناتس بوكس (6 قطع)", desc: "تشكيلة متنوعة من أفضل 6 نكهات دوناتس مختارة", price: 120, img: "https://images.unsplash.com/photo-1514517521153-1be72277b32f?auto=format&fit=crop&w=300&q=80" }
+            { id: 1, cat: 'donuts', name: "دوناتس نوتيلا فادج", desc: "محشوة شيكولاتة نوتيلا أصلية مع مكسرات بندق", price: 45, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=300" },
+            { id: 2, cat: 'donuts', name: "دوناتس لوتس كرانشي", desc: "مغطاة بزبدة اللوتس وبسكويت كرانشي محمص", price: 50, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=300" },
+            { id: 3, cat: 'donuts', name: "دوناتس بينك جلايزد", desc: "دوناتس خفيفة بطعم الفراولة والسكر الوردي", price: 35, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300" },
+            { id: 4, cat: 'cookies', name: "كوكيز تشوكليت شيبس", desc: "كوكيز أمريكي دافئ بحبيبات الشيكولاتة الداكنة", price: 30, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300" },
+            { id: 5, cat: 'cookies', name: "كوكيز ريد فيلفيت", desc: "طري بقطع الشيكولاتة البيضاء والجبن الكريمي", price: 40, img: "https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?w=300" },
+            { id: 6, cat: 'cinnamon', name: "سينامون رول أوريجينال", desc: "لفائف القرفة الطازجة بجليد السكر والكريمي", price: 55, img: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=300" },
+            { id: 7, cat: 'donuts', name: "دوناتس بستاشيو فستق", desc: "مغطاة بزبدة الفستق الطبيعية وقطع الفستق", price: 60, img: "https://images.unsplash.com/photo-1626094309830-abbb0c99da4a?w=300" },
+            { id: 8, cat: 'donuts', name: "دوناتس كراميل مملح", desc: "مزيج السولتد كراميل الرائع مع الفول السوداني", price: 40, img: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?w=300" },
+            { id: 9, cat: 'cookies', name: "كوكيز ثلاثي الشيكولاتة", desc: "مزيج غني من الشيكولاتة البيضاء والدارك والحليب", price: 45, img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300" },
+            { id: 10, cat: 'donuts', name: "ميني دوناتس بوكس (6 قطع)", desc: "تشكيلة متنوعة من أفضل 6 نكهات دوناتس مختارة", price: 120, img: "https://images.unsplash.com/photo-1514517521153-1be72277b32f?w=300" }
         ];
 
-        const cart = {};
-        let currentCat = 'all';
+        var cart = {};
+        var currentCat = 'all';
 
         function renderMenu() {
-            const container = document.getElementById('menuContainer');
-            const filtered = currentCat === 'all' ? products : products.filter(p => p.cat === currentCat);
-            
-            if (filtered.length === 0) {
-                container.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:20px;">لا توجد أصناف في هذا القسم حالياً</div>';
-                return;
-            }
+            var container = document.getElementById('menuContainer');
+            if(!container) return;
 
-            container.innerHTML = filtered.map(prod => `
-                <div class="item-card">
-                    <img src="${prod.img}" class="item-img" alt="${prod.name}" onerror="this.src='https://via.placeholder.com/80/251638/FF0080?text=Donut'">
-                    <div class="item-info">
-                        <div class="item-name">${prod.name}</div>
-                        <div class="item-desc">${prod.desc}</div>
-                        <div class="item-price">${prod.price} ج.م</div>
-                    </div>
-                    <div class="quantity-controls">
-                        <button class="qty-btn minus" onclick="updateQty(${prod.id}, -1)">-</button>
-                        <span class="qty-val" id="qty-${prod.id}">${cart[prod.id] || 0}</span>
-                        <button class="qty-btn" onclick="updateQty(${prod.id}, 1)">+</button>
-                    </div>
-                </div>
-            `).join('');
+            var filtered = (currentCat === 'all') ? products : products.filter(function(p) { return p.cat === currentCat; });
+            
+            var html = '';
+            for (var i = 0; i < filtered.length; i++) {
+                var prod = filtered[i];
+                var qty = cart[prod.id] || 0;
+                html += '<div class="item-card">' +
+                    '<img src="' + prod.img + '" class="item-img" alt="' + prod.name + '">' +
+                    '<div class="item-info">' +
+                        '<div class="item-name">' + prod.name + '</div>' +
+                        '<div class="item-desc">' + prod.desc + '</div>' +
+                        '<div class="item-price">' + prod.price + ' ج.م</div>' +
+                    '</div>' +
+                    '<div class="quantity-controls">' +
+                        '<button class="qty-btn minus" onclick="updateQty(' + prod.id + ', -1)">-</button>' +
+                        '<span class="qty-val" id="qty-' + prod.id + '">' + qty + '</span>' +
+                        '<button class="qty-btn" onclick="updateQty(' + prod.id + ', 1)">+</button>' +
+                    '</div>' +
+                '</div>';
+            }
+            container.innerHTML = html;
         }
 
         function filterCategory(cat, btn) {
             currentCat = cat;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            var buttons = document.querySelectorAll('.cat-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
             btn.classList.add('active');
             renderMenu();
         }
@@ -511,22 +516,27 @@
         function updateQty(id, change) {
             cart[id] = (cart[id] || 0) + change;
             if (cart[id] < 0) cart[id] = 0;
-            const el = document.getElementById(`qty-${id}`);
+            var el = document.getElementById('qty-' + id);
             if (el) el.innerText = cart[id];
             calculateTotal();
         }
 
         function calculateTotal() {
-            let itemsTotal = 0;
-            products.forEach(p => {
-                if (cart[p.id]) itemsTotal += cart[p.id] * p.price;
-            });
+            var itemsTotal = 0;
+            for (var i = 0; i < products.length; i++) {
+                var p = products[i];
+                if (cart[p.id]) {
+                    itemsTotal += cart[p.id] * p.price;
+                }
+            }
             document.getElementById('totalPriceDisplay').innerText = itemsTotal + ' ج.م';
         }
 
         function openCheckoutModal() {
-            let totalQty = 0;
-            Object.values(cart).forEach(v => totalQty += v);
+            var totalQty = 0;
+            for (var k in cart) {
+                totalQty += cart[k];
+            }
             if (totalQty === 0) {
                 alert('برجاء اختيار صنف واحد على الأقل أولاً!');
                 return;
@@ -539,18 +549,20 @@
         }
 
         function sendOrderWhatsApp() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const address = document.getElementById('custAddress').value.trim();
-            const notes = document.getElementById('custNotes').value.trim();
-            const deliveryFee = parseInt(document.getElementById('deliveryZone').value);
+            var name = document.getElementById('custName').value.trim();
+            var phone = document.getElementById('custPhone').value.trim();
+            var address = document.getElementById('custAddress').value.trim();
+            var notes = document.getElementById('custNotes').value.trim();
+            var deliveryFee = parseInt(document.getElementById('deliveryZone').value);
 
             if (!name || !phone || !address) {
-                alert('يرجى ملء كافة البيانات المطلوبة أولاً!');
+                alert('يرجى ملء كافة البيانات المطلوب إدخالها!');
                 return;
             }
 
-            let orderItemsText = '';
-            let itemsSum = 0;
+            var orderItemsText = '';
+            var itemsSum = 0;
 
-            products.forEach(p =
+            for (var i = 0; i < products.length; i++) {
+                var p = products[i];
+                if (
