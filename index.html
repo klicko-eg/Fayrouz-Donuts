@@ -35,7 +35,6 @@
             padding-bottom: 90px;
         }
 
-        /* Announcement Bar */
         .promo-bar {
             background: linear-gradient(135deg, var(--primary-pink), var(--secondary-purple));
             color: #fff;
@@ -53,7 +52,6 @@
             padding: 15px;
         }
 
-        /* Store Header */
         .store-header {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -89,7 +87,6 @@
             margin-top: 4px;
         }
 
-        /* Header Social Links */
         .social-header-links {
             display: flex;
             justify-content: center;
@@ -117,7 +114,6 @@
             color: var(--primary-pink);
         }
 
-        /* Category Filter Buttons */
         .category-scroll {
             display: flex;
             gap: 8px;
@@ -151,7 +147,6 @@
             box-shadow: 0 4px 12px rgba(255, 0, 128, 0.3);
         }
 
-        /* Menu Grid */
         .menu-grid {
             display: flex;
             flex-direction: column;
@@ -171,11 +166,12 @@
         }
 
         .item-img {
-            width: 85px;
-            height: 85px;
+            width: 80px;
+            height: 80px;
             border-radius: 16px;
             object-fit: cover;
             flex-shrink: 0;
+            background: #251638;
         }
 
         .item-info {
@@ -201,7 +197,6 @@
             color: var(--primary-pink);
         }
 
-        /* Controls (+ / -) */
         .quantity-controls {
             display: flex;
             align-items: center;
@@ -238,7 +233,6 @@
             text-align: center;
         }
 
-        /* Bottom Fixed Bar */
         .cart-bar {
             position: fixed;
             bottom: 0;
@@ -281,7 +275,6 @@
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
-        /* Modal Box */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -382,20 +375,17 @@
 </head>
 <body>
 
-    <!-- Promo Announcement Bar -->
     <div class="promo-bar">
         🎉 عرض خاص: خصم 10% عند طلب بوكس الميني دوناتس اليوم! 🍩
     </div>
 
     <div class="container">
         
-        <!-- Store Header -->
         <div class="store-header">
-            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=200" alt="Fayrouz Donuts" class="store-avatar">
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=200&q=80" alt="Fayrouz Donuts" class="store-avatar">
             <h1 class="store-title">FAYROUZ DONUTS</h1>
             <p class="store-desc">دوناتس وكوكيز طازجة ولذيذة تُحضر يومياً بأجود المكونات 🍩✨</p>
             
-            <!-- Social Icons Links -->
             <div class="social-header-links">
                 <a href="https://www.tiktok.com/@klicko.eg" target="_blank" class="social-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="#" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -404,7 +394,6 @@
             </div>
         </div>
 
-        <!-- Category Filter -->
         <div class="category-scroll">
             <button class="cat-btn active" onclick="filterCategory('all', this)">الكل 🍩</button>
             <button class="cat-btn" onclick="filterCategory('donuts', this)">دوناتس 🍩</button>
@@ -412,12 +401,10 @@
             <button class="cat-btn" onclick="filterCategory('cinnamon', this)">سينامون وحلويات 🥐</button>
         </div>
 
-        <!-- Menu List -->
         <div class="menu-grid" id="menuContainer"></div>
 
     </div>
 
-    <!-- Fixed Cart Footer -->
     <div class="cart-bar">
         <div>
             <div class="cart-total-label">إجمالي الطلب:</div>
@@ -429,7 +416,6 @@
         </button>
     </div>
 
-    <!-- Checkout Modal -->
     <div class="modal-overlay" id="checkoutModal">
         <div class="modal-box">
             <i class="fa-solid fa-xmark modal-close" onclick="closeCheckoutModal()"></i>
@@ -472,17 +458,18 @@
     </div>
 
     <script>
+        // الأصناف التجريبية المجهزة
         const products = [
-            { id: 1, cat: 'donuts', name: "دوناتس نوتيلا فادج", desc: "محشوة شيكولاتة نوتيلا أصلية مع مكسرات بندق", price: 45, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=300" },
-            { id: 2, cat: 'donuts', name: "دوناتس لوتس كرانشي", desc: "مغطاة بزبدة اللوتس وبسكويت كرانشي محمص", price: 50, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=300" },
-            { id: 3, cat: 'donuts', name: "دوناتس بينك جلايزد", desc: "دوناتس خفيفة بطعم الفراولة والسكر الوردي", price: 35, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300" },
-            { id: 4, cat: 'cookies', name: "كوكيز تشوكليت شيبس", desc: "كوكيز أمريكي دافئ بحبيبات الشيكولاتة الداكنة", price: 30, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300" },
-            { id: 5, cat: 'cookies', name: "كوكيز ريد فيلفيت", desc: "طري بقطع الشيكولاتة البيضاء والجبن الكريمي", price: 40, img: "https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?w=300" },
-            { id: 6, cat: 'cinnamon', name: "سينامون رول أوريجينال", desc: "لفائف القرفة الطازجة بجليد السكر والكريمي", price: 55, img: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=300" },
-            { id: 7, cat: 'donuts', name: "دوناتس بستاشيو فستق", desc: "مغطاة بزبدة الفستق الطبيعية وقطع الفستق", price: 60, img: "https://images.unsplash.com/photo-1626094309830-abbb0c99da4a?w=300" },
-            { id: 8, cat: 'donuts', name: "دوناتس كراميل مملح", desc: "مزيج السولتد كراميل الرائع مع الفول السوداني", price: 40, img: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?w=300" },
-            { id: 9, cat: 'cookies', name: "كوكيز ثلاثي الشيكولاتة", desc: "مزيج غني من الشيكولاتة البيضاء والدارك والحليب", price: 45, img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300" },
-            { id: 10, cat: 'donuts', name: "ميني دوناتس بوكس (6 قطع)", desc: "تشكيلة متنوعة من أفضل 6 نكهات دوناتس مختارة", price: 120, img: "https://images.unsplash.com/photo-1514517521153-1be72277b32f?w=300" }
+            { id: 1, cat: 'donuts', name: "دوناتس نوتيلا فادج", desc: "محشوة شيكولاتة نوتيلا أصلية مع مكسرات بندق", price: 45, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=300&q=80" },
+            { id: 2, cat: 'donuts', name: "دوناتس لوتس كرانشي", desc: "مغطاة بزبدة اللوتس وبسكويت كرانشي محمص", price: 50, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80" },
+            { id: 3, cat: 'donuts', name: "دوناتس بينك جلايزد", desc: "دوناتس خفيفة بطعم الفراولة والسكر الوردي", price: 35, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80" },
+            { id: 4, cat: 'cookies', name: "كوكيز تشوكليت شيبس", desc: "كوكيز أمريكي دافئ بحبيبات الشيكولاتة الداكنة", price: 30, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=300&q=80" },
+            { id: 5, cat: 'cookies', name: "كوكيز ريد فيلفيت", desc: "طري بقطع الشيكولاتة البيضاء والجبن الكريمي", price: 40, img: "https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?auto=format&fit=crop&w=300&q=80" },
+            { id: 6, cat: 'cinnamon', name: "سينامون رول أوريجينال", desc: "لفائف القرفة الطازجة بجليد السكر والكريمي", price: 55, img: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=300&q=80" },
+            { id: 7, cat: 'donuts', name: "دوناتس بستاشيو فستق", desc: "مغطاة بزبدة الفستق الطبيعية وقطع الفستق", price: 60, img: "https://images.unsplash.com/photo-1626094309830-abbb0c99da4a?auto=format&fit=crop&w=300&q=80" },
+            { id: 8, cat: 'donuts', name: "دوناتس كراميل مملح", desc: "مزيج السولتد كراميل الرائع مع الفول السوداني", price: 40, img: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=300&q=80" },
+            { id: 9, cat: 'cookies', name: "كوكيز ثلاثي الشيكولاتة", desc: "مزيج غني من الشيكولاتة البيضاء والدارك والحليب", price: 45, img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=300&q=80" },
+            { id: 10, cat: 'donuts', name: "ميني دوناتس بوكس (6 قطع)", desc: "تشكيلة متنوعة من أفضل 6 نكهات دوناتس مختارة", price: 120, img: "https://images.unsplash.com/photo-1514517521153-1be72277b32f?auto=format&fit=crop&w=300&q=80" }
         ];
 
         const cart = {};
@@ -492,9 +479,14 @@
             const container = document.getElementById('menuContainer');
             const filtered = currentCat === 'all' ? products : products.filter(p => p.cat === currentCat);
             
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding:20px;">لا توجد أصناف في هذا القسم حالياً</div>';
+                return;
+            }
+
             container.innerHTML = filtered.map(prod => `
                 <div class="item-card">
-                    <img src="${prod.img}" class="item-img" alt="${prod.name}">
+                    <img src="${prod.img}" class="item-img" alt="${prod.name}" onerror="this.src='https://via.placeholder.com/80/251638/FF0080?text=Donut'">
                     <div class="item-info">
                         <div class="item-name">${prod.name}</div>
                         <div class="item-desc">${prod.desc}</div>
@@ -561,8 +553,4 @@
             let orderItemsText = '';
             let itemsSum = 0;
 
-            products.forEach(p => {
-                if (cart[p.id] > 0) {
-                    const itemTotal = cart[p.id] * p.price;
-                    itemsSum += itemTotal;
-                    orderItemsText += `• ${p.name} (عدد 
+            products.forEach(p =
