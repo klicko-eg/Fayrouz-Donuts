@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Donuts & Bakery | متجر الدوناتس والحلويات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0F0817;
+            --card-bg: rgba(26, 16, 37, 0.85);
+            --border-color: rgba(255, 0, 128, 0.25);
+            --primary-pink: #FF0080;
+            --secondary-purple: #7928CA;
+            --text-color: #FFFFFF;
+            --text-muted: #A1A1AA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(121, 40, 202, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            padding-bottom: 90px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        /* Store Header */
+        .store-header {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .store-avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            border: 2px solid var(--primary-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.4);
+            object-fit: cover;
+        }
+
+        .store-title {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFF, var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .store-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary-pink);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        .item-img {
+            width: 85px;
+            height: 85px;
+            border-radius: 16px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-size: 14.5px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .item-desc {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .item-price {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--primary-pink);
+        }
+
+        /* Controls (+ / -) */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .qty-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: var(--primary-pink);
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn.minus {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .qty-val {
+            font-size: 14px;
+            font-weight: 800;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Bottom Fixed Bar */
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 16, 37, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--primary-pink);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 900;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.5);
+        }
+
+        .cart-total-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .cart-total-price {
+            font-size: 18px;
+            font-weight: 900;
+            color: #FFF;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Modal Box */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: #1A1025;
+            border: 1px solid var(--primary-pink);
+            border-radius: 24px;
+            padding: 22px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            text-align: right;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            font-size: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--primary-pink);
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 13.5px;
+            outline: none;
+        }
+
+        .send-order-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Store Header -->
+        <div class="store-header">
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=200" alt="Donuts Logo" class="store-avatar">
+            <h1 class="store-title">SWEET DONUTS</h1>
+            <p class="store-desc">أفخم أنواع الدوناتس والكوكيز الطازجة يومياً 🍩✨</p>
+        </div>
+
+        <div class="section-title">
+            <i class="fa-solid fa-cookie-bite"></i>
+            <span>قائمة الحلويات والدوناتس:</span>
+        </div>
+
+        <!-- Menu List (10 Items) -->
+        <div class="menu-grid" id="menuContainer"></div>
+
+    </div>
+
+    <!-- Fixed Cart Footer -->
+    <div class="cart-bar">
+        <div>
+            <div class="cart-total-label">إجمالي الطلب:</div>
+            <div class="cart-total-price" id="totalPriceDisplay">0 ج.م</div>
+        </div>
+        <button class="checkout-btn" onclick="openCheckoutModal()">
+            <i class="fa-brands fa-whatsapp"></i>
+            إتمام الطلب
+        </button>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark modal-close" onclick="closeCheckoutModal()"></i>
+            <h3 class="modal-title">بيانات الاستلام والتوصيل</h3>
+            
+            <div class="form-group">
+                <label>الاسم بالكامل:</label>
+                <input type="text" id="custName" class="form-input" placeholder="اكتب اسمك هنا">
+            </div>
+
+            <div class="form-group">
+                <label>رقم الموبايل:</label>
+                <input type="tel" id="custPhone" class="form-input" placeholder="010xxxxxxx">
+            </div>
+
+            <div class="form-group">
+                <label>العنوان بالتفصيل:</label>
+                <input type="text" id="custAddress" class="form-input" placeholder="المنطقة، الشارع، رقم الشقة">
+            </div>
+
+            <button class="send-order-btn" onclick="sendOrderWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i>
+                تأكيد وإرسال عبر الواتساب
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 10 Random Items Sample Data
+        const products = [
+            { id: 1, name: "دوناتس نوتيلا فادج", desc: "محشوة شيكولاتة نوتيلا أصلية مع مكسرات بندق", price: 45, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=300" },
+            { id: 2, name: "دوناتس لوتس كرانشي", desc: "مغطاة بزبدة اللوتس وبسكويت كرانشي محمص", price: 50, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=300" },
+            { id: 3, name: "دوناتس بينك جلايزد", desc: "دوناتس خفيفة بطعم الفراولة والسكر الوردي", price: 35, img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300" },
+            { id: 4, name: "كوكيز تشوكليت شيبس", desc: "كوكيز أمريكي دافئ بحبيبات الشيكولاتة الداكنة", price: 30, img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300" },
+            { id: 5, name: "كوكيز ريد فيلفيت", desc: "طري بقطع الشيكولاتة البيضاء والجبن الكريمي", price: 40, img: "https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?w=300" },
+            { id: 6, name: "سينامون رول أوريجينال", desc: "لفائف القرفة الطازجة بجليد السكر والكريمي", price: 55, img: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=300" },
+            { id: 7, name: "دوناتس بستاشيو فستق", desc: "مغطاة بزبدة الفستق الطبيعية وقطع الفستق", price: 60, img: "https://images.unsplash.com/photo-1626094309830-abbb0c99da4a?w=300" },
+            { id: 8, name: "دوناتس كراميل مملح", desc: "مزيج السولتد كراميل الرائع مع الفول السوداني", price: 40, img: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?w=300" },
+            { id: 9, name: "كوكيز ثلاثي الشيكولاتة", desc: "مزيج غني من الشيكولاتة البيضاء والدارك والحليب", price: 45, img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300" },
+            { id: 10, name: "ميني دوناتس بوكس (6 قطع)", desc: "تشكيلة متنوعة من أفضل 6 نكهات دوناتس مختارة", price: 120, img: "https://images.unsplash.com/photo-1514517521153-1be72277b32f?w=300" }
+        ];
+
+        const cart = {};
+
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = products.map(prod => `
+                <div class="item-card">
+                    <img src="${prod.img}" class="item-img" alt="${prod.name}">
+                    <div class="item-info">
+                        <div class="item-name">${prod.name}</div>
+                        <div class="item-desc">${prod.desc}</div>
+                        <div class="item-price">${prod.price} ج.م</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus" onclick="updateQty(${prod.id}, -1)">-</button>
+                        <span class="qty-val" id="qty-${prod.id}">0</span>
+                        <button class="qty-btn" onclick="updateQty(${prod.id}, 1)">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateQty(id, change) {
+            cart[id] = (cart[id] || 0) + change;
+            if (cart[id] < 0) cart[id] = 0;
+            document.getElementById(`qty-${id}`).innerText = cart[id];
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            products.forEach(p => {
+                if (cart[p.id]) total += cart[p.id] * p.price;
+            });
+            document.getElementById('totalPriceDisplay').innerText = total + ' ج.م';
+        }
+
+        function openCheckoutModal() {
+            let total = 0;
+            Object.values(cart).forEach(v => total += v);
+            if (total === 0) {
+                alert('برجاء اختيار صنف واحد على الأقل أولاً!');
+                return;
+            }
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function sendOrderWhatsApp() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('يرجى ملء كافة البيانات أولاً!');
+                return;
+            }
+
+            let orderItemsText = '';
+            let totalSum = 0;
+
+            products.forEach(p => {
+                if (cart[p.id] > 0) {
+                    const itemTotal = cart[p.id] * p.price;
+                    totalSum += itemTotal;
+                    orderItemsText += `• ${p.name} (عدد ${cart[p.id]}) = ${itemTotal} ج.م\n`;
+                }
+            });
+
+            const text = `أهلاً Sweet Donuts 👋\nأود طلب الأوردر التالي:\n\n${orderItemsText}\n💵 *الإجمالي:* ${totalSum} ج.م\n\n👤 *الاسم:* ${name}\n📞 *الرقم:* ${phone}\n📍 *العنوان:* ${address}`;
+
+            const encodedText = encodeURIComponent(text);
+            // Replace phone number with the target store WhatsApp
+            window.open(`https://wa.me/201556760265?text=${encodedText}`, '_blank');
+            closeCheckoutModal();
+        }
+
+        renderMenu();
+    </script>
+</body>
+  </html>
+  
